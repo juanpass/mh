@@ -1,6 +1,6 @@
 // src/components/HomeSections.jsx
 import "../styles/home.css";
-import heroImage from "../assets/img/hero.webp";
+import heroImage from "../assets/img/hero2.webp";
 
 
 const HomeSections = () => {
