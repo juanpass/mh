@@ -20,3 +20,41 @@ def handle_hello():
     }
 
     return jsonify(response_body), 200
+
+
+@api.route('/user/signin', methods=['POST'])
+def handle_register_new_user():
+    request_body = request.get_json()
+    if not request_body:
+        return jsonify({"message": "No request body"}), 400
+    if not request_body.get("email"):
+        return jsonify({"message": "No email"}), 400
+    if not request_body.get("password"):
+        return jsonify({"message": "No password"}), 400
+
+    user = User(email=request_body["email"],
+                password=request_body["password"],
+                is_active=True
+                )
+    db.session.add(user)
+    db.session.commit()
+    return jsonify(user.serialize()), 201
+
+
+@api.route('/user/login', methods=['POST'])
+def handle_login_user():
+    request_body = request.get_json()
+    if not request_body:
+        return jsonify({"message": "No request body"}), 400
+    if not request_body.get("email"):
+        return jsonify({"message": "No email"}), 400
+    if not request_body.get("password"):
+        return jsonify({"message": "No password"}), 400
+
+    user = User.query.filter_by(email=request_body["email"]).first()
+    if not user:
+        return jsonify({"message": "Invalid Credentials"}), 404
+    if user.password != request_body["password"]:
+        return jsonify({"message": "Invalid Credentials"}), 401
+
+    return jsonify({"user": user.serialize(), "message": "Login successful"}), 200
