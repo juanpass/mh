@@ -23,6 +23,11 @@ def handle_register_new_user():
     if not request_body.get("password"):
         return jsonify({"message": "No password"}), 400
 
+    if User.query.filter_by(email=request_body["email"]).first():
+        return jsonify({"message": "User already exists"}), 400
+    if len(request_body["password"]) < 6:
+        return jsonify({"message": "Password must be at least 6 characters"}), 400
+
     user = User(email=request_body["email"],
                 password=request_body["password"],
                 is_active=True
