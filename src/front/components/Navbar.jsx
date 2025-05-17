@@ -1,4 +1,5 @@
-import { Link } from "react-router-dom";
+import React from "react";
+import logo from "../assets/img/master-help-logo-hz.webp";
 
 export const Navbar = () => {
 
@@ -17,3 +18,5 @@ export const Navbar = () => {
 		</nav>
 	);
 };
+
+export default Navbar;
