@@ -1,4 +1,5 @@
-import { Link } from "react-router-dom";
+import React from "react";
+import logo from "../assets/img/master-help-logo-hz.webp";
 
 export const Navbar = () => {
 
@@ -9,14 +10,13 @@ export const Navbar = () => {
 					<span className="navbar-brand mb-0 h1">React Boilerplate</span>
 				</Link>
 				<div className="ml-auto">
-					<Link to="/login">
-						<button className="btn btn-primary">Iniciar Sesion</button>
-					</Link>
-					<Link to="/signin">
-						<button className="btn btn-primary">Registrarse</button>
+					<Link to="/demo">
+						<button className="btn btn-primary">Check the Context in action</button>
 					</Link>
 				</div>
 			</div>
 		</nav>
 	);
 };
+
+export default Navbar;
